@@ -5,7 +5,7 @@ import (
 
 	"github.com/astaxie/beego"
 	"template/utils"
-	// "log"
+	"github.com/astaxie/beego/context"
 )
 
 type RuleController struct {
@@ -30,7 +30,7 @@ func (c *RuleController) AeTest() {
 	}
 	c.Data["rules"] = rules
 	c.Data["ap"] = string("ae_test")
-	c.Layout = "index.tpl"
+	c.Layout = "components/layout.tpl"
 
 	total := models.Count()
 	c.Data["paginator"] = utils.Set(page, page_size, total)
