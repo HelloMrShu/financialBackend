@@ -1,8 +1,45 @@
 .row {
     height: 35px;
     line-height: 35px;
+    /* text-align: center; */
+}
+
+.row-line:hover {
+    background: aliceblue;
 }
 
 .rule-title {
     background-color: #eee;
+}
+
+.search-item {
+    display: inline-block;
+    margin-right: 20px;
+    padding: 2px;
+}
+
+.search-item input {
+    border-radius: 5px;
+    border: 1px solid silver;
+}
+
+.search-item option {
+    border-radius: 10px;
+}
+
+.rule-select {
+    height: 20px;
+    border-radius: 20px;
+}
+
+.expand {
+    display: inline-block;
+    margin-left: 10px;
+    font-style: italic;
+}
+
+.expand:hover {
+    cursor: pointer;
+    color:black;
+    font-weight: bold;
 }

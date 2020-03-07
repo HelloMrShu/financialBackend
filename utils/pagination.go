@@ -35,8 +35,8 @@ func Set(page, pageSize, count int) Pagination {
 	}
 
 	var ranges []int
-	if count <= 5 {
-		for i := 0; i < totalPages; i ++ {
+	if totalPages <= 5 {
+		for i := page; i < totalPages; i ++ {
 			ranges = append(ranges, i)
 		}
 	} else if totalPages - page < 5 {

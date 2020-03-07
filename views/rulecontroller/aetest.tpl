@@ -1,3 +1,22 @@
+<div class="select-form">
+    <form action="/ae/test" method="get" id="ruleForm">
+        <div class="form-group search-item">
+            模板名称：<input type="text" value="{{.sname}}" name="sname" placeholder="请输入模板名称" />
+        </div>
+        <div class="form-group search-item">
+            媒体：
+            <select name="smedia" form="ruleForm" class="ruleselect">
+                <option value="">请选择</option>
+                {{range $k, $v := .mediaList}}
+                    <option value="{{$k}}" {{if compare $.smedia $k}} selected {{end}}>{{$v}}</option>
+                {{end}}
+            </select>
+        </div>
+        <div class="form-group search-item">
+            <input type="submit" value="查询" />
+        </div>
+    </form>
+</div>
 
 <div class="row rule-title">
     <div class="col-md-1">ID</div>
@@ -5,17 +24,62 @@
     <div class="col-md-1">平台</div>
     <div class="col-md-3">模板名称</div>
     <div class="col-md-2">媒体</div>
-    <div class="col-md-4">配置</div>
+    <div class="col-md-4">配置信息</div>
 </div>
+
 {{range .rules}}
-<div class="row">
+<div class="row rule-line">
     <div class="col-md-1">{{.Id}}</div>
     <div class="col-md-1">{{.Bidmode}}</div>
     <div class="col-md-1">{{.Platform}}</div>
     <div class="col-md-3">{{.Name}}</div>
     <div class="col-md-2">{{.Media}}</div>
-    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <span>
+            {{substr .Content 0 30}}
+            <input class="rule-{{.Id}}" type="hidden" value="{{.Content}}" />
+        </span>
+        <span class="expand" onclick="expand()">[展开]</span>
+    </div>
 </div>
 {{end}}
 
-{{template "../components/pagination.tpl" .}}
+<div class="row">
+    <div class="paginator">
+        <div class="page-item">
+            <a href="/ae/test?page={{.paginator.PrePage}}">上一页</a>
+        </div>
+        <div class="page-item">
+            {{range $k, $v := .paginator.Ranges}}
+            <a href='/ae/test?page={{$v}}' {{if eq $.paginator.Page $v}} class="active" {{end}}>    
+                <span>{{ $v }}</span>
+            </a>
+            {{end}}
+        </div>
+        <div class="page-item">
+            <a href='/ae/test?page={{.paginator.NextPage}}'>下一页</a>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="panel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+              </div>            
+        </div>
+    </div>
+</div>
