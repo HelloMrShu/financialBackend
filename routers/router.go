@@ -9,4 +9,5 @@ import (
 func init() {
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("/ae/test", &controllers.RuleController{}, "get:AeTest")
+	beego.Router("/ex/test", &controllers.RuleController{}, "get:ExTest")
 }

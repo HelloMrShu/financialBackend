@@ -5,7 +5,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type ChrAdrule struct {
+type TemplateExTest struct {
 	Id   		int32 `orm:"pk"`
 	Platform 	string
 	Bidmode 	string
@@ -17,32 +17,28 @@ type ChrAdrule struct {
 }
 
 func init() {
-	orm.RegisterModel(new(ChrAdrule))	
+	orm.RegisterModel(new(TemplateExTest))
 }
 
-func (m *ChrAdrule) Read() error {
+func (m *TemplateExTest) Read() error {
 	if err := orm.NewOrm().Read(m); err != nil {
 		return err
 	}
 	return nil
 }
 
-func TestList(
+func ExTestList(
 	page int,
 	page_size int,
-	strCond map[string]string,
-	intCond map[string]int) []orm.Params {
+	strCond map[string]string) []orm.Params {
 	
 	offset := (page - 1) * page_size
 	o := orm.NewOrm()
-	qs := o.QueryTable("chr_adrule")
+	o.Using("extest")
+	qs := o.QueryTable("template_ex_test")
 
 	if strCond["name"] != "" {
 		qs = qs.Filter("name__contains", strCond["name"])
-	}
-
-	if intCond["media"] != 0 {
-		qs = qs.Filter("Media__exact", intCond["media"])
 	}
 
 	var rules []orm.Params
@@ -50,15 +46,11 @@ func TestList(
 	return rules
 }
 
-func Count(strCond map[string]string, intCond map[string]int) int {
+func ExCount(strCond map[string]string) int {
 	o := orm.NewOrm()
-	qs := o.QueryTable("chr_adrule")
+	qs := o.QueryTable("template_ex_test")
 	if strCond["name"] != "" {
 		qs = qs.Filter("name__contains", strCond["name"])
-	}
-
-	if intCond["media"] != 0 {
-		qs = qs.Filter("Media__exact", intCond["media"])
 	}
 	c,_ := qs.Count()
 	return int(c)

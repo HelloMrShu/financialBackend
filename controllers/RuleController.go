@@ -5,7 +5,6 @@ import (
 
 	"github.com/astaxie/beego"
 	"template/utils"
-	"log"
 	"strconv"
 )
 
@@ -50,7 +49,6 @@ func (c *RuleController) AeTest() {
 	c.Data["sname"] = name
 	c.Data["smedia"] = strconv.Itoa(mediaId)
 
-	log.Printf("type is %T", c.Data["smedia"])
 	mediaMap := map[string]string{
 		"1":  "搜狐网",
 		"2":  "手机搜狐网",
@@ -63,23 +61,6 @@ func (c *RuleController) AeTest() {
 	c.Data["mediaList"] = mediaMap
 }
 
-func findMediaId(name string) int {
-	mediaMap := map[string]int{
-		"搜狐网" : 1,
-		"手机搜狐网" : 2,
-		"搜狐新闻客户端" : 4,
-		"搜狐视频" : 8,
-		"移动版视频" : 11,
-		"搜狐资讯版" : 25,
-	}
-
-	id, ok := mediaMap[name]
-	if ok {
-		return id
-	} else {
-		return 0
-	}
-}
 func convertMedia(media string) string {
 	mediaMap := map[string]string{
 		"1":  "搜狐网",
@@ -95,4 +76,33 @@ func convertMedia(media string) string {
 	} else {
 		return ""
 	}
+}
+
+func (c *RuleController) ExTest() {
+	page, perr := c.GetInt("page")
+	if perr != nil {
+		page = 1
+	}
+	page_size, serr := c.GetInt("page_size")
+	if serr != nil {
+		page_size = 10
+	}
+
+	var stringCond = make(map[string]string)
+	name := c.GetString("sname")
+	stringCond["name"] = name
+
+	rules := models.ExTestList(page, page_size, stringCond)
+
+	c.Data["rules"] = rules
+	c.Data["ap"] = string("ex_test")
+	c.Layout = "components/layout.tpl"
+	c.TplName = "aetest.html"
+
+	total := models.ExCount(stringCond)
+	c.Data["paginator"] = utils.Set(page, page_size, total)
+	c.Data["sname"] = name
+
+	mediaMap := map[string]string{}
+	c.Data["mediaList"] = mediaMap
 }

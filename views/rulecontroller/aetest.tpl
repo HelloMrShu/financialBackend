@@ -22,9 +22,9 @@
     <div class="col-md-1">ID</div>
     <div class="col-md-1">结算方式</div>
     <div class="col-md-1">平台</div>
-    <div class="col-md-3">模板名称</div>
+    <div class="col-md-4">模板名称</div>
     <div class="col-md-2">媒体</div>
-    <div class="col-md-4">配置信息</div>
+    <div class="col-md-3">配置信息</div>
 </div>
 
 {{range .rules}}
@@ -32,14 +32,14 @@
     <div class="col-md-1">{{.Id}}</div>
     <div class="col-md-1">{{.Bidmode}}</div>
     <div class="col-md-1">{{.Platform}}</div>
-    <div class="col-md-3">{{.Name}}</div>
+    <div id="rn-{{.Id}}" class="col-md-4">{{.Name}}</div>
     <div class="col-md-2">{{.Media}}</div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <span>
-            {{substr .Content 0 30}}
-            <input class="rule-{{.Id}}" type="hidden" value="{{.Content}}" />
+            {{substr .Content 21 15}}
         </span>
-        <span class="expand" onclick="expand()">[展开]</span>
+        <input id="rc-{{.Id}}" type="hidden" value="{{.Content}}" />
+        <span class="expand" onclick="expand('{{.Id}}')">[展开]</span>
     </div>
 </div>
 {{end}}
@@ -62,24 +62,21 @@
     </div>
 </div>
 
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="panel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="panel" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                    
-                </h5>
+                <h5 class="modal-title" id="exampleModalScrollableTitle"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span>
                 </button>
-              </div>
-              <div class="modal-body">
+            </div>
+            <div class="modal-body">
                 ...
-              </div>
-              <div class="modal-footer">
+            </div>
+            <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-              </div>            
+            </div>
         </div>
     </div>
 </div>
