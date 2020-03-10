@@ -17,6 +17,7 @@ type ChrAdrule struct {
 }
 
 func init() {
+	orm.RegisterDataBase("default", "mysql", "dbuser:dbuser@tcp(10.19.37.10:3306)/berry?charset=utf8", 30)
 	orm.RegisterModel(new(ChrAdrule))	
 }
 

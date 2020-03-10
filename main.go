@@ -7,9 +7,10 @@ import (
 )
 
 func init() {
-    orm.Debug = true
-    orm.RegisterDataBase("default", "mysql", "dbuser:dbuser@tcp(10.19.37.10:3306)/berry?charset=utf8", 30)
-s}
+	orm.Debug = true
+	//注册驱动
+	orm.RegisterDriver("mysql", orm.DRMySQL)
+}
 
 func main() {
 	beego.Run()

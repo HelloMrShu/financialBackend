@@ -2,10 +2,12 @@ package controllers
 
 import (
 	"template/models"
-
 	"github.com/astaxie/beego"
 	"template/utils"
 	"strconv"
+	// "encoding/json"
+	// "bytes"
+	// "log"
 )
 
 type RuleController struct {
@@ -94,15 +96,24 @@ func (c *RuleController) ExTest() {
 
 	rules := models.ExTestList(page, page_size, stringCond)
 
+	// for index, val := range rules {
+	// 	by, _ := json.MarshalIndent(val["Content"], "", "\t")
+	// 	rules[index]["Content"] = string(by)
+		
+	// 	var out bytes.Buffer
+	// 	b, _ := json.Marshal(val["Content"])
+	// 	err := json.Indent(&out, b, "", "\t")
+
+		
+	// 	log.Println(out, err)
+
+	// }
+
 	c.Data["rules"] = rules
 	c.Data["ap"] = string("ex_test")
 	c.Layout = "components/layout.tpl"
-	c.TplName = "aetest.html"
 
 	total := models.ExCount(stringCond)
 	c.Data["paginator"] = utils.Set(page, page_size, total)
 	c.Data["sname"] = name
-
-	mediaMap := map[string]string{}
-	c.Data["mediaList"] = mediaMap
 }
