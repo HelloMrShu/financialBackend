@@ -5,7 +5,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type ExTemplateTest struct {
+type ExTemplateProd struct {
 	Id   		int32 `orm:"pk"`
 	Platform 	string
 	Bidmode 	string
@@ -17,11 +17,11 @@ type ExTemplateTest struct {
 }
 
 func init() {
-	orm.RegisterDataBase("test1", "mysql", "dbuser:dbuser@tcp(10.19.37.10:3306)/exchange_bata?charset=utf8", 30)
-	orm.RegisterModel(new(ExTemplateTest))
+	// orm.RegisterDataBase("test1", "mysql", "dbuser:dbuser@tcp(10.19.37.10:3306)/exchange_bata?charset=utf8", 30)
+	orm.RegisterModel(new(ExTemplateProd))
 }
 
-func ExTestList(
+func ExProdList(
 	page int,
 	page_size int,
 	strCond map[string]string) []orm.Params {
@@ -29,7 +29,7 @@ func ExTestList(
 	offset := (page - 1) * page_size
 	o := orm.NewOrm()
 	o.Using("test1")
-	qs := o.QueryTable("ex_template_test")
+	qs := o.QueryTable("ex_template_prod")
 
 	if strCond["name"] != "" {
 		qs = qs.Filter("name__contains", strCond["name"])
@@ -40,10 +40,10 @@ func ExTestList(
 	return rules
 }
 
-func ExCount(strCond map[string]string) int {
+func ExProdCount(strCond map[string]string) int {
 	o := orm.NewOrm()
 	o.Using("test1")
-	qs := o.QueryTable("ex_template_test")
+	qs := o.QueryTable("ex_template_prod")
 	if strCond["name"] != "" {
 		qs = qs.Filter("name__contains", strCond["name"])
 	}

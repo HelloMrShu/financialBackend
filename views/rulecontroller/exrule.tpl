@@ -1,5 +1,5 @@
 <div class="select-form">
-    <form action="/ex/test" method="get" id="ruleForm">
+    <form action="{{.url}}" method="get" id="ruleForm">
         <div class="form-group search-item">
             模板名称：<input type="text" value="{{.sname}}" name="sname" placeholder="请输入模板名称" />
         </div>
@@ -38,17 +38,17 @@
 <div class="row">
     <div class="paginator">
         <div class="page-item">
-            <a href="/ex/test?page={{.paginator.PrePage}}">上一页</a>
+            <a href="{{$.url}}?page={{.paginator.PrePage}}">上一页</a>
         </div>
         <div class="page-item">
             {{range $k, $v := .paginator.Ranges}}
-            <a href='/ex/test?page={{$v}}' {{if eq $.paginator.Page $v}} class="active" {{end}}>    
+            <a href="{{$.url}}?page={{$v}}" {{if eq $.paginator.Page $v}} class="active" {{end}}>    
                 <span>{{ $v }}</span>
             </a>
             {{end}}
         </div>
         <div class="page-item">
-            <a href='/ex/test?page={{.paginator.NextPage}}'>下一页</a>
+            <a href="{{$.url}}?page={{.paginator.NextPage}}">下一页</a>
         </div>
     </div>
 </div>

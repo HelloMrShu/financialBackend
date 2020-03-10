@@ -9,7 +9,7 @@ function expandexchange(id) {
     content = JSON.stringify(JSON.parse(content), null, 2);
      
     $(".modal-title").html("模板：" + name)
-    $(".modal-body").html("<pre>"+ content + "</pre>")
+    $(".modal-body").html("<code><pre>"+ content + "</pre></code>")
     $("#panel").modal("show")
 }
 

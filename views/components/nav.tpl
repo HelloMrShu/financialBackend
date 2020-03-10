@@ -14,7 +14,7 @@
           <a href="/ex/test">汇聚测试模板</a>
         </li>
         <li role="presentation" {{ if compare .ap "ex_prod" }} class="active-menu"{{ end }}>
-          <a href="#">汇聚线上模板</a>
+          <a href="/ex/prod">汇聚线上模板</a>
         </li>
       </ul>
     </nav>
