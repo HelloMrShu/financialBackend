@@ -17,7 +17,6 @@ type ExTemplateProd struct {
 }
 
 func init() {
-	// orm.RegisterDataBase("test1", "mysql", "dbuser:dbuser@tcp(10.19.37.10:3306)/exchange_bata?charset=utf8", 30)
 	orm.RegisterModel(new(ExTemplateProd))
 }
 
