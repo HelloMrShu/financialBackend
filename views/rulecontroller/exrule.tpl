@@ -13,9 +13,10 @@
     <div class="col-md-1">ID</div>
     <div class="col-md-1">结算方式</div>
     <div class="col-md-1">平台</div>
+    <div class="col-md-1">媒体</div>
     <div class="col-md-4">模板名称</div>
-    <div class="col-md-2">媒体</div>
-    <div class="col-md-3">配置信息</div>
+    <div class="col-md-3">英文KEY</div>
+    <div class="col-md-1">配置信息</div>
 </div>
 
 {{range .rules}}
@@ -23,12 +24,10 @@
     <div class="col-md-1">{{.Id}}</div>
     <div class="col-md-1">不限</div>
     <div class="col-md-1">不限</div>
+    <div class="col-md-1">不限</div>
     <div id="rn-{{.Id}}" class="col-md-4">{{.Name}}</div>
-    <div class="col-md-2">不限</div>
-    <div class="col-md-3">
-        <span>
-            {{substr .Content 0 20}}
-        </span>
+    <div class="col-md-3">{{.Special_type}}</div>
+    <div class="col-md-1">
         <input id="rc-{{.Id}}" type="hidden" value="{{.Content}}" />
         <span class="expand" onclick="expandexchange('{{.Id}}')">[展开]</span>
     </div>

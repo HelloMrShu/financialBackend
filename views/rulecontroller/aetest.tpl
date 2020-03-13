@@ -22,9 +22,10 @@
     <div class="col-md-1">ID</div>
     <div class="col-md-1">结算方式</div>
     <div class="col-md-1">平台</div>
-    <div class="col-md-4">模板名称</div>
     <div class="col-md-2">媒体</div>
-    <div class="col-md-3">配置信息</div>
+    <div class="col-md-3">模板名称</div>
+    <div class="col-md-3">英文KEY</div>
+    <div class="col-md-1">配置信息</div>
 </div>
 
 {{range .rules}}
@@ -32,12 +33,14 @@
     <div class="col-md-1">{{.Id}}</div>
     <div class="col-md-1">{{.Bidmode}}</div>
     <div class="col-md-1">{{.Platform}}</div>
-    <div id="rn-{{.Id}}" class="col-md-4">{{.Name}}</div>
     <div class="col-md-2">{{.Media}}</div>
-    <div class="col-md-3">
-        <span>
-            {{substr .Content 21 15}}
-        </span>
+    {{if lt (.Name|len) 40}}
+    <div id="rn-{{.Id}}" class="col-md-3">{{.Name}}</div>
+    {{else}}
+    <div id="rn-{{.Id}}" class="col-md-3" data-toggle="tooltip" data-placement="right" title="{{.Name}}">{{ substr .Name 0 15}}...</div>
+    {{end}}
+    <div class="col-md-3">{{.Special_type}}</div>
+    <div class="col-md-1">
         <input id="rc-{{.Id}}" type="hidden" value="{{.Content}}" />
         <span class="expand" onclick="expand('{{.Id}}')">[展开]</span>
     </div>
