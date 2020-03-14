@@ -27,7 +27,7 @@ func ExTestList(
 	
 	offset := (page - 1) * page_size
 	o := orm.NewOrm()
-	o.Using("test1")
+	o.Using("exchange")
 	qs := o.QueryTable("ex_template_test")
 
 	if strCond["name"] != "" {
@@ -44,7 +44,7 @@ func ExTestList(
 
 func ExTestCount(strCond map[string]string) int {
 	o := orm.NewOrm()
-	o.Using("test1")
+	o.Using("exchange")
 	qs := o.QueryTable("ex_template_test")
 	if strCond["name"] != "" {
 		qs = qs.Filter("name__contains", strCond["name"])

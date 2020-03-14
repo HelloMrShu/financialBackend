@@ -27,7 +27,7 @@ func ExProdList(
 	
 	offset := (page - 1) * page_size
 	o := orm.NewOrm()
-	o.Using("test1")
+	o.Using("exchange")
 	qs := o.QueryTable("ex_template_prod")
 
 	if strCond["name"] != "" {
@@ -43,7 +43,7 @@ func ExProdList(
 
 func ExProdCount(strCond map[string]string) int {
 	o := orm.NewOrm()
-	o.Using("test1")
+	o.Using("exchange")
 	qs := o.QueryTable("ex_template_prod")
 	if strCond["name"] != "" {
 		qs = qs.Filter("name__contains", strCond["name"])
