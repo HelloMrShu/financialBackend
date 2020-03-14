@@ -15,3 +15,7 @@
 2020/03/14 21:58:53.619 [D] [log.go:34]  logger init success
 2020/03/14 21:59:02.103 [D] [log.go:34]  logger init success
 2020/03/14 22:01:26.855 [D] [logger.go:34]  logger init success
+2020/03/14 22:21:53.285 [D] [logger.go:34]  logger init success
+2020/03/14 22:21:57.742 [D] [logger.go:34]  logger init success
+2020/03/14 22:24:58.138 [D] [logger.go:34]  logger init success
+2020/03/14 22:25:48.356 [D] [logger.go:34]  logger init success
