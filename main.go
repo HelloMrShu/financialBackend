@@ -5,8 +5,9 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/config"
-	"fmt"
+	"template/components"
 	"strings"
+	"fmt"
 )
 
 var BConfig config.Configer
@@ -32,6 +33,8 @@ func init() {
 	dbdriver := BConfig.String("dev::dbdriver")
 	orm.RegisterDataBase("default", dbdriver, aeDsn, 30)
 	orm.RegisterDataBase("exchange", dbdriver, exDsn, 30)
+
+	components.InitLogger()
 }
 
 func genDsn(dbuser,dbpwd,dbhost,dbport,dbname string) string {

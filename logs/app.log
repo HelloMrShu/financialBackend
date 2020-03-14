@@ -1,0 +1,17 @@
+2020/03/14 21:22:49.414 [A] [main.go:47]  Alert
+2020/03/14 21:42:22.033 [A] [main.go:59]  Alert
+2020/03/14 21:54:51.878 [D] [log.go:34]  logger init success
+2020/03/14 21:56:06.864 [D] [log.go:34]  logger init success
+2020/03/14 21:56:24.751 [D] [log.go:34]  logger init success
+2020/03/14 21:57:15.691 [D] [log.go:34]  logger init success
+2020/03/14 21:57:29.657 [D] [log.go:34]  logger init success
+2020/03/14 21:57:38.619 [D] [log.go:34]  logger init success
+2020/03/14 21:57:44.129 [D] [log.go:34]  logger init success
+2020/03/14 21:57:50.107 [D] [log.go:34]  logger init success
+2020/03/14 21:57:56.379 [D] [log.go:34]  logger init success
+2020/03/14 21:58:08.431 [D] [log.go:34]  logger init success
+2020/03/14 21:58:28.272 [D] [log.go:34]  logger init success
+2020/03/14 21:58:44.578 [D] [log.go:34]  logger init success
+2020/03/14 21:58:53.619 [D] [log.go:34]  logger init success
+2020/03/14 21:59:02.103 [D] [log.go:34]  logger init success
+2020/03/14 22:01:26.855 [D] [logger.go:34]  logger init success
