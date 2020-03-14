@@ -44,7 +44,7 @@ func Set(page, pageSize, count int) Pagination {
 	
 	} else if page == totalPages{
 		min := 0
-		if totalPages > 3 {
+		if totalPages >= 3 {
 			min = totalPages - 2
 		} else {
 			min = page
