@@ -13,6 +13,9 @@
             </select>
         </div>
         <div class="form-group search-item">
+            模板KEY：<input type="text" value="{{.stype}}" name="stype" placeholder="请输入模板KEY" />
+        </div>
+        <div class="form-group search-item">
             <input type="submit" value="查询" />
         </div>
     </form>
@@ -24,7 +27,7 @@
     <div class="col-md-1">平台</div>
     <div class="col-md-2">媒体</div>
     <div class="col-md-3">模板名称</div>
-    <div class="col-md-3">英文KEY</div>
+    <div class="col-md-3">模板KEY</div>
     <div class="col-md-1">配置信息</div>
 </div>
 
@@ -50,6 +53,9 @@
 <div class="row">
     <div class="paginator">
         <div class="page-item">
+            <a href="/ae/test?page=1">首页</a>
+        </div>
+        <div class="page-item">
             <a href="/ae/test?page={{.paginator.PrePage}}">上一页</a>
         </div>
         <div class="page-item">
@@ -62,6 +68,10 @@
         <div class="page-item">
             <a href='/ae/test?page={{.paginator.NextPage}}'>下一页</a>
         </div>
+        <div class="page-item">
+            <a href="/ae/test?page={{.paginator.TotalPages}}">尾页</a>
+        </div>
+        <div class="page-total">共&nbsp;{{.paginator.TotalPages}}&nbsp;页</div>
     </div>
 </div>
 

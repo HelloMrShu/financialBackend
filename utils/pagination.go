@@ -1,8 +1,4 @@
 package utils
- 
-import (
-    _ "github.com/go-sql-driver/mysql"
-)
 
 type Pagination struct {
 	Page int
@@ -35,16 +31,30 @@ func Set(page, pageSize, count int) Pagination {
 	}
 
 	var ranges []int
-	if totalPages <= 5 {
-		for i := page; i <= totalPages; i ++ {
+	if page == 1 {
+		max := 0
+		if totalPages <= 3 {
+			max = totalPages
+		} else {
+			max = 3
+		}
+		for i := page; i <= max; i ++ {
 			ranges = append(ranges, i)
 		}
-	} else if totalPages - page < 5 {
-		for i := totalPages -5; i <= totalPages; i++ {
+	
+	} else if page == totalPages{
+		min := 0
+		if totalPages > 3 {
+			min = totalPages - 2
+		} else {
+			min = page
+		}
+
+		for i := min; i <= totalPages; i ++ {
 			ranges = append(ranges, i)
 		}
 	} else {
-		for i := page; i < page+5 ; i++ {
+		for i := page - 1; i <= page + 1 ; i++ {
 			ranges = append(ranges, i)
 		}
 	}

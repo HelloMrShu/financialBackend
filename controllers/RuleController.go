@@ -25,7 +25,10 @@ func (c *RuleController) AeTest() {
 	var intCond = make(map[string]int)
 
 	name := c.GetString("sname")
+	stype := c.GetString("stype")
+	
 	stringCond["name"] = name
+	stringCond["special_type"] = stype
 
 	mediaId,merr := c.GetInt("smedia")
 	if merr == nil {
@@ -46,6 +49,7 @@ func (c *RuleController) AeTest() {
 	total := models.Count(stringCond, intCond)
 	c.Data["paginator"] = utils.Set(page, page_size, total)
 	c.Data["sname"] = name
+	c.Data["stype"] = stype
 	c.Data["smedia"] = strconv.Itoa(mediaId)
 
 	mediaMap := map[string]string{
@@ -89,7 +93,9 @@ func (c *RuleController) ExTest() {
 
 	var stringCond = make(map[string]string)
 	name := c.GetString("sname")
+	stype := c.GetString("stype")
 	stringCond["name"] = name
+	stringCond["special_type"] = stype
 
 	rules := models.ExTestList(page, page_size, stringCond)
 
@@ -102,6 +108,7 @@ func (c *RuleController) ExTest() {
 	total := models.ExTestCount(stringCond)
 	c.Data["paginator"] = utils.Set(page, page_size, total)
 	c.Data["sname"] = name
+	c.Data["stype"] = stype
 }
 
 func (c *RuleController) ExProd() {
@@ -116,7 +123,9 @@ func (c *RuleController) ExProd() {
 
 	var stringCond = make(map[string]string)
 	name := c.GetString("sname")
+	stype := c.GetString("stype")
 	stringCond["name"] = name
+	stringCond["special_type"] = stype
 
 	rules := models.ExProdList(page, page_size, stringCond)
 
@@ -129,4 +138,5 @@ func (c *RuleController) ExProd() {
 	total := models.ExProdCount(stringCond)
 	c.Data["paginator"] = utils.Set(page, page_size, total)
 	c.Data["sname"] = name
+	c.Data["stype"] = stype
 }

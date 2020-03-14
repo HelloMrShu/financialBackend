@@ -17,7 +17,6 @@ type ChrAdrule struct {
 }
 
 func init() {
-	orm.RegisterDataBase("default", "mysql", "dbuser:dbuser@tcp(10.19.37.10:3306)/berry?charset=utf8", 30)
 	orm.RegisterModel(new(ChrAdrule))	
 }
 
@@ -42,6 +41,10 @@ func TestList(
 		qs = qs.Filter("name__contains", strCond["name"])
 	}
 
+	if strCond["special_type"] != "" {
+		qs = qs.Filter("special_type__contains", strCond["special_type"])
+	}
+
 	if intCond["media"] != 0 {
 		qs = qs.Filter("Media__exact", intCond["media"])
 	}
@@ -60,6 +63,10 @@ func Count(strCond map[string]string, intCond map[string]int) int {
 
 	if intCond["media"] != 0 {
 		qs = qs.Filter("Media__exact", intCond["media"])
+	}
+
+	if strCond["special_type"] != "" {
+		qs = qs.Filter("special_type__contains", strCond["special_type"])
 	}
 	c,_ := qs.Count()
 	return int(c)

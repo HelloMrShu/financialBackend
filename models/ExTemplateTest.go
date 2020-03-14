@@ -17,7 +17,6 @@ type ExTemplateTest struct {
 }
 
 func init() {
-	orm.RegisterDataBase("test1", "mysql", "dbuser:dbuser@tcp(10.19.37.10:3306)/exchange_bata?charset=utf8", 30)
 	orm.RegisterModel(new(ExTemplateTest))
 }
 
@@ -34,6 +33,9 @@ func ExTestList(
 	if strCond["name"] != "" {
 		qs = qs.Filter("name__contains", strCond["name"])
 	}
+	if strCond["special_type"] != "" {
+		qs = qs.Filter("special_type__contains", strCond["special_type"])
+	}
 
 	var rules []orm.Params
 	qs.Limit(page_size, offset).Values(&rules)
@@ -46,6 +48,9 @@ func ExTestCount(strCond map[string]string) int {
 	qs := o.QueryTable("ex_template_test")
 	if strCond["name"] != "" {
 		qs = qs.Filter("name__contains", strCond["name"])
+	}
+	if strCond["special_type"] != "" {
+		qs = qs.Filter("special_type__contains", strCond["special_type"])
 	}
 	c,_ := qs.Count()
 	return int(c)
