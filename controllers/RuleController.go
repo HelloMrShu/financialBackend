@@ -1,10 +1,11 @@
 package controllers
 
 import (
+	"strconv"
+	"template/utils"
 	"template/models"
 	"github.com/astaxie/beego"
-	"template/utils"
-	"strconv"
+	"github.com/astaxie/beego/logs"
 )
 
 type RuleController struct {
@@ -82,6 +83,7 @@ func convertMedia(media string) string {
 }
 
 func (c *RuleController) ExTest() {
+	logs.Info("is info")
 	page, perr := c.GetInt("page")
 	if perr != nil {
 		page = 1

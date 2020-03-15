@@ -1,14 +1,14 @@
 package main
 
 import (
-	_ "template/routers"
 	"github.com/astaxie/beego"
+	_ "template/routers"
 	"template/components"
 )
 
 func init() {
-	components.InitDB()
 	components.InitLogger()
+	components.InitDB()
 }
 
 func main() {

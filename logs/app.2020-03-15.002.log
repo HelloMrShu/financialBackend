@@ -1,0 +1,10 @@
+2020/03/15 09:13:46.288 [D] [server.go:2774]  |            ::1|[42m 200 [0m|    68.1782ms|   match|[44m GET     [0m /ae/test   r:/ae/test
+2020/03/15 09:13:47.376 [D] [server.go:2774]  |            ::1|[42m 200 [0m|    41.1077ms|   match|[44m GET     [0m /ae/test   r:/ae/test
+2020/03/15 09:15:42.383 [I] [main.go:13]  123124 
+2020/03/15 09:15:42.444 [I] [asm_amd64.s:1337]  http server Running on http://:8080
+2020/03/15 09:16:25.853 [I] [main.go:13]  123124 
+2020/03/15 09:16:25.895 [I] [asm_amd64.s:1337]  http server Running on http://:8080
+2020/03/15 09:16:33.962 [I] [RuleController.go:19]  ae=test 
+2020/03/15 09:16:34.049 [D] [server.go:2774]  |            ::1|[42m 200 [0m|    88.2299ms|   match|[44m GET     [0m /ae/test   r:/ae/test
+2020/03/15 09:21:21.872 [I] [main.go:13]  123124 
+2020/03/15 09:21:21.953 [I] [asm_amd64.s:1337]  http server Running on http://:8080
