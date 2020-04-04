@@ -13,6 +13,7 @@ type RuleController struct {
 }
 
 func (c *RuleController) AeTest() {
+	beego.Info("hello world");
 	page, perr := c.GetInt("page")
 	if perr != nil {
 		page = 1
