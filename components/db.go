@@ -17,17 +17,14 @@ func InitDB()  {
 	dbuser := BConfig.String("dev::dbuser")
 	dbpwd := BConfig.String("dev::dbpass")
 	dbhost := BConfig.String("dev::dbhost")
-	aedbname := BConfig.String("dev::aedbname")
+	dbname := BConfig.String("dev::dbname")
 	dbport := BConfig.String("dev::dbport")
 
-	aeDsn := genDsn(dbuser,dbpwd,dbhost,dbport,aedbname)
-	exdbname := BConfig.String("dev::exdbname")
-	exDsn :=genDsn(dbuser,dbpwd,dbhost,dbport,exdbname)
+	dsn := genDsn(dbuser,dbpwd,dbhost,dbport,dbname)
 
 	orm.Debug = true
 	dbdriver := BConfig.String("dev::dbdriver")
-	orm.RegisterDataBase("default", dbdriver, aeDsn, 30)
-	orm.RegisterDataBase("exchange", dbdriver, exDsn, 30)
+	orm.RegisterDataBase("default", dbdriver, dsn, 30)
 }
 
 func genDsn(dbuser,dbpwd,dbhost,dbport,dbname string) string {

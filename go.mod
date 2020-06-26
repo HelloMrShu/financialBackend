@@ -1,4 +1,4 @@
-module template
+module funds
 
 go 1.12
 

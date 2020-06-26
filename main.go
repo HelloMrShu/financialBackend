@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/astaxie/beego"
-	_ "template/routers"
-	"template/components"
+	_ "funds/routers"
+	"funds/components"
 )
 
 func init() {
