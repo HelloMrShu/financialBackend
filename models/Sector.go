@@ -31,7 +31,7 @@ func SectorList(page int, page_size int) ([]orm.Params, int) {
 	qs := o.QueryTable("sector")
 
 	var sectors []orm.Params
-	qs.Limit(page_size, offset).Values(&sectors)
+	qs.OrderBy("-id").Limit(page_size, offset).Values(&sectors)
 
 	total,_ := qs.Count()
 	return sectors, int(total)
