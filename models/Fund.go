@@ -38,13 +38,17 @@ func FundList(page int, page_size int) ([]orm.Params, int) {
 	return funds, int(total)
 }
 
-func FundSave(name string, intro string) bool {
+func FundSave(params map[string]string) bool {
 	
 	timestamp := int32(time.Now().Unix())
-	sector := Sector{Name:name, Intro:intro, Created:timestamp}
+	fund := Fund{
+		Name: params["name"],
+		Intro: params["intro"],
+		Created: timestamp}
+	
 
 	orm := orm.NewOrm()
-	_, err := orm.Insert(&sector)
+	_, err := orm.Insert(&fund)
 	if err != nil {
 		return false
 	}

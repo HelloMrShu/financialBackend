@@ -16,3 +16,14 @@ func (c *FundController) FundList() {
 	funds, total := models.FundList(page, pageSize)
 	c.ApiResponse(200, "success", funds, total)
 }
+
+func (c *FundController) FundSave() {
+
+	cond := make(map[string]string)
+
+	cond["name"] = c.GetString("name")
+	cond["intro"] = c.GetString("intro")
+	
+	status := models.FundSave(cond)
+	c.Response(200, "success", status)
+}

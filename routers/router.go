@@ -13,5 +13,5 @@ func init() {
 	beego.Router("/sector/delete", &controllers.SectorController{}, "post:SectorDelete")
 
 	beego.Router("/fund/list", &controllers.FundController{}, "get:FundList")
-
+	beego.Router("/fund/save", &controllers.FundController{}, "post:FundSave")
 }
