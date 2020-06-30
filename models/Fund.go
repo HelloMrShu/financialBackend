@@ -10,7 +10,7 @@ type Fund struct {
 	Id   		int32 `orm:"pk"`
 	Name 		string
 	Intro 		string
-	Level 		int32
+	Level 		int8
 	Type 		string
 	Bid_rate 	float64
 	Sale_week_rate 	float64
@@ -38,14 +38,15 @@ func FundList(page int, page_size int) ([]orm.Params, int) {
 	return funds, int(total)
 }
 
-func FundSave(params map[string]string) bool {
+func FundSave(strCond map[string]string, intCond map[string]int8) bool {
 	
 	timestamp := int32(time.Now().Unix())
 	fund := Fund{
-		Name: params["name"],
-		Intro: params["intro"],
+		Name: strCond["name"],
+		Intro: strCond["intro"],
+		Type: strCond["type"],
+		Level: intCond["level"],
 		Created: timestamp}
-	
 
 	orm := orm.NewOrm()
 	_, err := orm.Insert(&fund)
@@ -57,9 +58,9 @@ func FundSave(params map[string]string) bool {
 
 func FundDelete(id int32) bool {
 	
-	sector := Sector{Id:id}
+	fund := Fund{Id:id}
 	orm := orm.NewOrm()
-	_, err := orm.Delete(&sector)
+	_, err := orm.Delete(&fund)
 	if err != nil {
 		return false
 	}

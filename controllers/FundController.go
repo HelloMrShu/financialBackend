@@ -19,11 +19,26 @@ func (c *FundController) FundList() {
 
 func (c *FundController) FundSave() {
 
-	cond := make(map[string]string)
+	strCond := make(map[string]string)
+	intCond := make(map[string]int8)
+	level, _ := c.GetInt8("level", 0)
 
-	cond["name"] = c.GetString("name")
-	cond["intro"] = c.GetString("intro")
+	strCond["name"] = c.GetString("name")
+	strCond["intro"] = c.GetString("intro")
+	strCond["type"] = c.GetString("type")
+	intCond["level"] = level
 	
-	status := models.FundSave(cond)
+	status := models.FundSave(strCond, intCond)
+	c.Response(200, "success", status)
+}
+
+func (c *FundController) FundDelete() {
+
+	id, _ := c.GetInt32("id", 0)
+
+	status := false
+	if id != 0 {
+		status = models.FundDelete(id)
+	}
 	c.Response(200, "success", status)
 }
