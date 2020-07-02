@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"funds/models"
-	// "time"
+	"time"
 )
 
 type FundController struct {
@@ -12,8 +12,33 @@ type FundController struct {
 func (c *FundController) FundList() {
 	page,_ := c.GetInt("page", 1)
 	pageSize,_ := c.GetInt("page_size", 10)
+
+	sectors,_ := models.SectorList(1, 100)
+	
+	idToNameMap := make(map[int64]string)
+	for _, item := range sectors {
+		id := item["Id"].(int64)
+		name := item["Name"].(string)
+		idToNameMap[id] = name 
+	}
 	
 	funds, total := models.FundList(page, pageSize)
+
+	for key, fund := range funds {
+		ts := fund["Created"].(int64)
+		funds[key]["Created"] = time.Unix(ts, 0).Format("2006-01-02 15:04:05")
+		
+		level := fund["Level"].(int64)
+		levelDisplay := ""
+		for i := 0; i < int(level); i++ {
+			levelDisplay += "★";
+		}
+		funds[key]["Level_display"] = levelDisplay
+
+		sectorId := fund["Sector_id"].(int64)
+		funds[key]["Sector_name"] = idToNameMap[sectorId]
+	}
+
 	c.ApiResponse(200, "success", funds, total)
 }
 
