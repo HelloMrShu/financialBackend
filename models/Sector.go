@@ -11,6 +11,7 @@ type Sector struct {
 	Name 	string
 	Intro 	string
 	Created int32
+	Updated int32
 }
 
 func init() {
@@ -24,30 +25,44 @@ func (m *Sector) Read() error {
 	return nil
 }
 
-func SectorList(page int, page_size int) ([]orm.Params, int) {
+func SectorList(page int, page_size int, id int) ([]orm.Params, int) {
 	
 	offset := (page - 1) * page_size
 	o := orm.NewOrm()
 	qs := o.QueryTable("sector")
 
 	var sectors []orm.Params
+	if id != 0 {
+		qs = qs.Filter("id", id)
+	}
 	qs.OrderBy("-id").Limit(page_size, offset).Values(&sectors)
 
 	total,_ := qs.Count()
 	return sectors, int(total)
 }
 
-func SectorSave(name string, intro string) bool {
+func SectorSave(id int32, name string, intro string) int64 {
 	
 	timestamp := int32(time.Now().Unix())
-	sector := Sector{Name:name, Intro:intro, Created:timestamp}
-
+	
 	orm := orm.NewOrm()
-	_, err := orm.Insert(&sector)
-	if err != nil {
-		return false
+
+	var sector Sector
+	if id != 0 {
+		sector = Sector{Id:id, Name:name, Intro:intro, Updated:timestamp}
+		sid, err := orm.Update(&sector)
+		if err != nil {
+			return sid
+		}
+	} else {
+		sector = Sector{Name:name, Intro:intro, Created:timestamp}
+		sid, err := orm.Insert(&sector)
+		if err != nil {
+			return sid
+		}
 	}
-	return true
+	
+	return 0
 }
 
 func SectorDelete(id int32) bool {

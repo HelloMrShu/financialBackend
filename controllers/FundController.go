@@ -13,7 +13,7 @@ func (c *FundController) FundList() {
 	page,_ := c.GetInt("page", 1)
 	pageSize,_ := c.GetInt("page_size", 10)
 
-	sectors,_ := models.SectorList(1, 100)
+	sectors,_ := models.SectorList(1, 100, 0)
 	
 	idToNameMap := make(map[int64]string)
 	for _, item := range sectors {
