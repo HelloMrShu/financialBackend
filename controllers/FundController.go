@@ -50,9 +50,9 @@ func (c *FundController) FundSave() {
 
 	level, _ := c.GetInt("level", 0)
 	bid_rate, _ := c.GetFloat("bid_rate")
-	sale_week_rate, _ := c.GetFloat("bid_rate")
-	sale_month_rate, _ := c.GetFloat("bid_rate")
-	sale_year_rate, _ := c.GetFloat("bid_rate")
+	sale_week_rate, _ := c.GetFloat("sale_week_rate")
+	sale_month_rate, _ := c.GetFloat("sale_month_rate")
+	sale_year_rate, _ := c.GetFloat("sale_year_rate")
 	sector_id, _ := c.GetInt("sector_id")
 
 	strCond["name"] = c.GetString("name")
