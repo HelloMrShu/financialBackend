@@ -38,29 +38,52 @@ func FundList(page int, page_size int) ([]orm.Params, int) {
 	return funds, int(total)
 }
 
-func FundSave(strCond map[string]string,
+func FundSave(id int32, 
+	strCond map[string]string,
 	intCond map[string]int,
-	floatCond map[string]float64) bool {
+	floatCond map[string]float64) int64 {
 	
 	timestamp := int32(time.Now().Unix())
-	fund := Fund{
-		Name: strCond["name"],
-		Intro: strCond["intro"],
-		Type: strCond["type"],
-		Level: intCond["level"],
-		Sector_id: intCond["sector_id"],
-		Bid_rate: floatCond["bid_rate"],
-		Sale_week_rate: floatCond["sale_week_rate"],
-		Sale_month_rate: floatCond["sale_month_rate"],
-		Sale_year_rate: floatCond["sale_year_rate"],
-		Created: timestamp}
 
-	orm := orm.NewOrm()
-	_, err := orm.Insert(&fund)
-	if err != nil {
-		return false
+	o := orm.NewOrm()
+	fund := Fund{Id: id}
+	rerr := o.Read(&fund)
+
+	var err interface{} = nil
+	ret := int64(0)
+	
+	if rerr == nil {
+		fund.Id = id
+		fund.Name = strCond["name"]
+		fund.Intro = strCond["intro"]
+		fund.Type = strCond["type"]
+		fund.Level = intCond["level"]
+		fund.Sector_id = intCond["sector_id"]
+		fund.Bid_rate = floatCond["bid_rate"]
+		fund.Sale_week_rate = floatCond["sale_week_rate"]
+		fund.Sale_month_rate = floatCond["sale_month_rate"]
+		fund.Sale_year_rate = floatCond["sale_year_rate"]
+		fund.Updated = timestamp
+		ret, err = o.Update(&fund)
+
+	} else {
+		fund.Name = strCond["name"]
+		fund.Intro = strCond["intro"]
+		fund.Type = strCond["type"]
+		fund.Level = intCond["level"]
+		fund.Sector_id = intCond["sector_id"]
+		fund.Bid_rate = floatCond["bid_rate"]
+		fund.Sale_week_rate = floatCond["sale_week_rate"]
+		fund.Sale_month_rate = floatCond["sale_month_rate"]
+		fund.Sale_year_rate = floatCond["sale_year_rate"]
+		fund.Created = timestamp
+		ret, err = o.Insert(&fund)
 	}
-	return true
+
+	if err != nil {
+		return 0;
+	}
+	return ret
 }
 
 func FundDelete(id int32) bool {

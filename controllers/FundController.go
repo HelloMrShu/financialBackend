@@ -66,8 +66,10 @@ func (c *FundController) FundSave() {
 	floatCond["sale_week_rate"] = sale_week_rate
 	floatCond["sale_month_rate"] = sale_month_rate
 	floatCond["sale_year_rate"] = sale_year_rate
-	
-	status := models.FundSave(strCond, intCond, floatCond)
+
+	id, _ := c.GetInt32("id", 0)
+
+	status := models.FundSave(id, strCond, intCond, floatCond)
 	c.Response(200, "success", status)
 }
 
