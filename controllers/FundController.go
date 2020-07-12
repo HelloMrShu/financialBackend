@@ -11,6 +11,7 @@ type FundController struct {
 
 func (c *FundController) FundList() {
 	page,_ := c.GetInt("page", 1)
+	checked,_ := c.GetInt("checked")
 	pageSize,_ := c.GetInt("page_size", 10)
 
 	sectors,_ := models.SectorList(1, 100, 0)
@@ -22,7 +23,7 @@ func (c *FundController) FundList() {
 		idToNameMap[id] = name 
 	}
 	
-	funds, total := models.FundList(page, pageSize)
+	funds, total := models.FundList(page, pageSize, checked)
 
 	for key, fund := range funds {
 		ts := fund["Created"].(int64)
@@ -82,4 +83,20 @@ func (c *FundController) FundDelete() {
 		status = models.FundDelete(id)
 	}
 	c.Response(200, "success", status)
+}
+
+func (c *FundController) FundUpdate() {
+
+	intCond := make(map[string]int)
+
+	id, _ := c.GetInt32("id", 0)
+	checked, _ := c.GetInt("checked", 0)
+	intCond["checked"] = checked
+
+	status := false
+	if id != 0 {
+		status = models.FundUpdate(id, intCond)
+	}
+	c.Response(200, "success", status)
+
 }

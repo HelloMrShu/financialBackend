@@ -17,6 +17,7 @@ type Fund struct {
 	Sale_month_rate 	float64
 	Sale_year_rate 	float64
 	Sector_id 	int
+	Checked 	int
 	Updated 	int32
 	Created 	int32
 }
@@ -25,11 +26,15 @@ func init() {
 	orm.RegisterModel(new(Fund))
 }
 
-func FundList(page int, page_size int) ([]orm.Params, int) {
+func FundList(page int, page_size int, checked int) ([]orm.Params, int) {
 	
 	offset := (page - 1) * page_size
 	o := orm.NewOrm()
 	qs := o.QueryTable("fund")
+
+	if checked != 0 {
+		qs = qs.Filter("checked", 1)
+	}
 
 	var funds []orm.Params
 	qs.OrderBy("-id").Limit(page_size, offset).Values(&funds)
@@ -91,6 +96,23 @@ func FundDelete(id int32) bool {
 	fund := Fund{Id:id}
 	orm := orm.NewOrm()
 	_, err := orm.Delete(&fund)
+	if err != nil {
+		return false
+	}
+	return true
+}
+
+func FundUpdate(id int32, intCond map[string]int) bool {
+	
+	fund := Fund{Id:id}
+	o := orm.NewOrm()
+	rerr := o.Read(&fund)
+	if rerr == nil {
+		fund.Checked = intCond["checked"]
+	}
+
+	var err interface{} = nil
+	_, err = o.Update(&fund)
 	if err != nil {
 		return false
 	}
