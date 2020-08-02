@@ -16,4 +16,8 @@ func init() {
 	beego.Router("/fund/save", &controllers.FundController{}, "post:FundSave")
 	beego.Router("/fund/delete", &controllers.FundController{}, "post:FundDelete")
 	beego.Router("/fund/update", &controllers.FundController{}, "post:FundUpdate")
+
+	beego.Router("/news/list", &controllers.NewsController{}, "get:NewsList")
+	beego.Router("/news/save", &controllers.NewsController{}, "post:NewsSave")
+	beego.Router("/news/delete", &controllers.NewsController{}, "post:NewsDelete")
 }
